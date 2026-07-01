@@ -83,11 +83,17 @@ RUN ln -sf /usr/lib/x86_64-linux-gnu/libffi.so.7 /opt/conda/lib/libffi.so.7
 # details.
 # ENTRYPOINT does not support easily running multiple commands, so instead we
 # write a shell script to wrap them up.
+
+# Node.js + OpenCode 설치
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN npm install -g opencode-ai@1.17.12 opencode-codex-usage@1.0.0
+
+COPY docker/startup.sh /app/startup.sh
+RUN chmod +x /app/startup.sh
+
 WORKDIR /app/alphafold
-RUN echo $'#!/bin/bash\n\
-ldconfig\n\
-python /app/alphafold/run_alphafold.py "$@"' > /app/run_alphafold.sh \
-  && chmod +x /app/run_alphafold.sh
-  
 EXPOSE 22
-ENTRYPOINT ["/app/run_alphafold.sh"]
+ENTRYPOINT ["/app/startup.sh"]
