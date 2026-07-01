@@ -84,6 +84,11 @@ RUN ln -sf /usr/lib/x86_64-linux-gnu/libffi.so.7 /opt/conda/lib/libffi.so.7
 # ENTRYPOINT does not support easily running multiple commands, so instead we
 # write a shell script to wrap them up.
 
+# curl 설치 (Node.js 설치 스크립트에 필요)
+RUN apt-get update --quiet \
+    && apt-get install --no-install-recommends --yes --quiet curl ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
 # Node.js + OpenCode 설치
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
