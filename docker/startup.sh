@@ -25,7 +25,7 @@ cat > /etc/profile.d/gcube_env.sh << EOF
 export GITHUB_REPO="${GITHUB_REPO}"
 export GITHUB_TOKEN="${GITHUB_TOKEN}"
 export OPENCODE_AUTH_B64="${OPENCODE_AUTH_B64}"
-export PATH="/opt/conda/bin:\$PATH"
+export PATH="/opt/conda/bin:/opt/conda/envs/colabfold/bin:\$PATH"
 export LD_LIBRARY_PATH="/opt/conda/lib:\$LD_LIBRARY_PATH"
 EOF
     chmod +x /etc/profile.d/gcube_env.sh
@@ -81,7 +81,13 @@ EOF
     else
         echo "  ⚠ OPENCODE_AUTH_B64 환경변수 없음 — 인증 없이 시작됨"
     fi
-
+    echo "[4.5/5] ColabFold 가중치 캐시 영구화..."
+    mkdir -p /data/colabfold-cache
+    mkdir -p ~/.cache
+    if [ ! -L ~/.cache/colabfold ]; then
+        rm -rf ~/.cache/colabfold
+        ln -sf /data/colabfold-cache ~/.cache/colabfold
+    fi  
     # ── 5. 마무리 ──────────────────────────────────────────
     echo "[5/5] GPU 라이브러리 경로 설정..."
     ldconfig

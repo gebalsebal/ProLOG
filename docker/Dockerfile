@@ -65,6 +65,24 @@ RUN pip3 install --no-cache-dir \
     && pip3 install --no-cache-dir --force-reinstall \
       "jax[cuda12]==0.4.26"   # colabfold가 건드린 jax 버전 다시 고정
 
+# ── ColabFold 전용 별도 conda 환경 생성 (base 환경과 완전히 격리) ──
+RUN conda create -n colabfold python=3.11 -y \
+    && conda clean --all --force-pkgs-dirs --yes
+
+RUN /opt/conda/envs/colabfold/bin/pip install --no-cache-dir --upgrade pip \
+    && /opt/conda/envs/colabfold/bin/pip install --no-cache-dir \
+      "colabfold[alphafold,openmm]" \
+      "openmm[cuda12]" \
+    && /opt/conda/envs/colabfold/bin/pip install --no-cache-dir --force-reinstall \
+      "jax[cuda12]==0.4.26" \
+      "jaxlib==0.4.26+cuda12.cudnn89" \
+      -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html \
+    && /opt/conda/envs/colabfold/bin/pip uninstall -y jax-cuda12-plugin jax-cuda12-pjrt \
+    && /opt/conda/envs/colabfold/bin/pip install --no-cache-dir --no-deps "dm-haiku==0.0.11"
+
+# colabfold_batch를 PATH에 추가 (base의 python3/conda 환경은 그대로 우선순위 유지)
+ENV PATH="${PATH}:/opt/conda/envs/colabfold/bin"
+
 RUN chmod u+s /sbin/ldconfig.real
 RUN ln -sf /usr/lib/x86_64-linux-gnu/libffi.so.7 /opt/conda/lib/libffi.so.7
 
