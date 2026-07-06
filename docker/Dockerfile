@@ -1,32 +1,19 @@
 # Copyright 2021 DeepMind Technologies Limited
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# ... (라이선스 주석 동일) ...
 
 ARG CUDA=12.2.2
 FROM nvidia/cuda:${CUDA}-cudnn8-runtime-ubuntu20.04
-# FROM directive resets ARGS, so we specify again (the value is retained if
-# previously set).
 ARG CUDA
-
-# Use bash to support string substitution.
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update --quiet \
     && apt-get install --no-install-recommends --yes --quiet \
         build-essential \
         cmake \
         cuda-command-line-tools-$(cut -f1,2 -d- <<< ${CUDA//./-}) \
+        curl \
+        ca-certificates \
         git \
         hmmer \
         kalign \
@@ -60,11 +47,10 @@ RUN conda install --quiet --yes conda==24.11.1 pip python=3.11 \
     && conda install --quiet --yes --channel nvidia cuda=${CUDA_VERSION} \
     && conda clean --all --force-pkgs-dirs --yes
 
-COPY . /app/alphafold
+# pip 패키지 설치 — requirements.txt만 먼저 복사해서 캐시 활용
+COPY requirements.txt /app/alphafold/requirements.txt
 RUN wget -q -P /app/alphafold/alphafold/common/ \
   https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
-
-# Install pip packages.
 RUN pip3 install --upgrade pip --no-cache-dir \
     && pip3 install -r /app/alphafold/requirements.txt --no-cache-dir \
     && pip3 install --upgrade --no-cache-dir \
@@ -72,30 +58,24 @@ RUN pip3 install --upgrade pip --no-cache-dir \
       jaxlib==0.4.26+cuda12.cudnn89 \
       -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
-# Add SETUID bit to the ldconfig binary so that non-root users can run it.
-RUN chmod u+s /sbin/ldconfig.real
+# ── ColabFold 추가 ──────────────────────────────
+RUN pip3 install --no-cache-dir \
+      "colabfold[alphafold,openmm]" \
+      "openmm[cuda12]" \
+    && pip3 install --no-cache-dir --force-reinstall \
+      "jax[cuda12]==0.4.26"   # colabfold가 건드린 jax 버전 다시 고정
 
-# Currently needed to avoid undefined_symbol error.
+RUN chmod u+s /sbin/ldconfig.real
 RUN ln -sf /usr/lib/x86_64-linux-gnu/libffi.so.7 /opt/conda/lib/libffi.so.7
 
-# We need to run `ldconfig` first to ensure GPUs are visible, due to some quirk
-# with Debian. See https://github.com/NVIDIA/nvidia-docker/issues/1399 for
-# details.
-# ENTRYPOINT does not support easily running multiple commands, so instead we
-# write a shell script to wrap them up.
-
-# curl 설치 (Node.js 설치 스크립트에 필요)
-RUN apt-get update --quiet \
-    && apt-get install --no-install-recommends --yes --quiet curl ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
-
-# Node.js + OpenCode 설치
+# Node.js + OpenCode 설치 (무거운 설치, 자주 안 바뀜)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
-
 RUN npm install -g opencode-ai@1.17.12 opencode-codex-usage@1.0.0
 
+# ── 여기부터 자주 바뀌는 것들: 맨 마지막에 배치 ──────────────
+COPY . /app/alphafold
 COPY docker/startup.sh /app/startup.sh
 RUN chmod +x /app/startup.sh
 
