@@ -1,6 +1,3 @@
-# Copyright 2021 DeepMind Technologies Limited
-# ... (라이선스 주석 동일) ...
-
 ARG CUDA=12.2.2
 FROM nvidia/cuda:${CUDA}-cudnn8-runtime-ubuntu20.04
 ARG CUDA
@@ -19,9 +16,19 @@ RUN apt-get update --quiet \
         kalign \
         tzdata \
         wget \
+        locales \
+        tmux \
+    && sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+    && locale-gen en_US.UTF-8 \
+    && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+    && echo 'set -g default-terminal "screen-256color"' > /etc/tmux.conf \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get autoremove --yes \
     && apt-get clean
+
+ENV LANG=en_US.UTF-8 \
+    LC_ALL=en_US.UTF-8 \
+    LANGUAGE=en_US:en
 
 # Compile HHsuite from source.
 RUN git clone --branch v3.3.0 --single-branch https://github.com/soedinglab/hh-suite.git /tmp/hh-suite \
@@ -40,8 +47,7 @@ RUN wget -q -P /tmp \
     && rm /tmp/Miniconda3-latest-Linux-x86_64.sh
 
 # Install Conda packages.
-ENV PATH="/opt/conda/bin:$PATH"
-ENV LD_LIBRARY_PATH="/opt/conda/lib:$LD_LIBRARY_PATH"
+ENV PATH="/opt/conda/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
 ENV CONDA_PLUGINS_AUTO_ACCEPT_TOS="yes"
 RUN conda install --quiet --yes conda==24.11.1 pip python=3.11 \
     && conda install --quiet --yes --channel nvidia cuda=${CUDA_VERSION} \
@@ -58,13 +64,6 @@ RUN pip3 install --upgrade pip --no-cache-dir \
       jaxlib==0.4.26+cuda12.cudnn89 \
       -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
-# ── ColabFold 추가 ──────────────────────────────
-RUN pip3 install --no-cache-dir \
-      "colabfold[alphafold,openmm]" \
-      "openmm[cuda12]" \
-    && pip3 install --no-cache-dir --force-reinstall \
-      "jax[cuda12]==0.4.26"   # colabfold가 건드린 jax 버전 다시 고정
-
 # ── ColabFold 전용 별도 conda 환경 생성 (base 환경과 완전히 격리) ──
 RUN conda create -n colabfold python=3.11 -y \
     && conda clean --all --force-pkgs-dirs --yes
@@ -80,7 +79,6 @@ RUN /opt/conda/envs/colabfold/bin/pip install --no-cache-dir --upgrade pip \
     && /opt/conda/envs/colabfold/bin/pip uninstall -y jax-cuda12-plugin jax-cuda12-pjrt \
     && /opt/conda/envs/colabfold/bin/pip install --no-cache-dir --no-deps "dm-haiku==0.0.11"
 
-# colabfold_batch를 PATH에 추가 (base의 python3/conda 환경은 그대로 우선순위 유지)
 ENV PATH="${PATH}:/opt/conda/envs/colabfold/bin"
 
 RUN chmod u+s /sbin/ldconfig.real
