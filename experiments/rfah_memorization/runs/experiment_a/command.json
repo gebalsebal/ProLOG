@@ -1,0 +1,40 @@
+{
+  "command": [
+    "/opt/conda/envs/colabfold/bin/colabfold_batch",
+    "--msa-mode",
+    "single_sequence",
+    "--model-type",
+    "alphafold2_ptm",
+    "--num-recycle",
+    "0",
+    "--num-models",
+    "5",
+    "--num-seeds",
+    "5",
+    "--random-seed",
+    "0",
+    "--data",
+    "/data/params",
+    "--amber",
+    "--use-gpu-relax",
+    "experiments/rfah_memorization/data/prepared/rfah_ctd_115_162.fasta",
+    "experiments/rfah_memorization/runs/experiment_a"
+  ],
+  "supported_flags": {
+    "--msa-mode": true,
+    "--num-recycle": true,
+    "--num-seeds": true,
+    "--num-models": true,
+    "--model-type": true,
+    "--use-dropout": true,
+    "--save-recycles": true,
+    "--save-pair-representations": true,
+    "--save-single-representations": true,
+    "--save-all": true,
+    "--amber": true,
+    "--use-gpu-relax": true,
+    "--data": true
+  },
+  "executed": true,
+  "shell_command": "/opt/conda/envs/colabfold/bin/colabfold_batch --msa-mode single_sequence --model-type alphafold2_ptm --num-recycle 0 --num-models 5 --num-seeds 5 --random-seed 0 --data /data/params --amber --use-gpu-relax experiments/rfah_memorization/data/prepared/rfah_ctd_115_162.fasta experiments/rfah_memorization/runs/experiment_a"
+}

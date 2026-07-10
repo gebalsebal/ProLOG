@@ -1,0 +1,3 @@
+check,item,status,detail
+optional_tool,mkdssp,missing,DSSP unavailable; using labeled coordinate heuristic
+optional_tool,TMalign,missing,TM-align unavailable; writing NA structural alignment fields

@@ -1,0 +1,4 @@
+2026-07-10 13:06:06,934 Running colabfold 1.6.1
+2026-07-10 13:06:06,941 WARNING: no GPU detected, will be using CPU
+2026-07-10 13:06:08,105 Found 5 citations for tools or databases
+2026-07-10 13:06:08,105 Query 1/1: sp_P0AFW0_RFAH_ECOLI_Transcription_antitermination_protein_RfaH_OS_Escherichia_coli__strain_K12__OX_83333_GN_rfaH_PE_1_SV_1 (length 162)

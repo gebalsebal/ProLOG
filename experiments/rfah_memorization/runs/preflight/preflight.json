@@ -1,0 +1,23 @@
+{
+  "colabfold_batch": "/opt/conda/envs/colabfold/bin/colabfold_batch",
+  "colabfold_help_exit_code": 0,
+  "params_dir": "/data/params",
+  "params_present": true,
+  "platform": "Linux-5.15.0-143-generic-x86_64-with-glibc2.31",
+  "python": "/opt/conda/envs/colabfold/bin/python",
+  "requested_flags": {
+    "--amber": true,
+    "--data": true,
+    "--model-type": true,
+    "--msa-mode": true,
+    "--num-models": true,
+    "--num-recycle": true,
+    "--num-seeds": true,
+    "--save-all": true,
+    "--save-pair-representations": true,
+    "--save-recycles": true,
+    "--save-single-representations": true,
+    "--use-dropout": true,
+    "--use-gpu-relax": true
+  }
+}

@@ -1,0 +1,7 @@
+2026-07-10 13:01:15,085 Running colabfold 1.6.1
+2026-07-10 13:01:16,406 Running on GPU
+2026-07-10 13:01:16,482 Found 3 citations for tools or databases
+2026-07-10 13:01:16,482 Query 1/1: rfah_ctd_115_162_P0AFW0_residues_115_162 (length 48)
+2026-07-10 13:01:18,310 Could not predict rfah_ctd_115_162_P0AFW0_residues_115_162. Not Enough GPU memory? INTERNAL: ptxas exited with non-zero error code 65280, output: ptxas fatal   : Program with .target 'sm_90a' cannot be compiled to future architecture
+: If the error message indicates that a file could not be written, please verify that sufficient filesystem space is provided.
+2026-07-10 13:01:18,310 Done

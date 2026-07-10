@@ -1,0 +1,11 @@
+{
+  "beta_reference_note": "2LCL is the Burmann et al. isolated RfaH CTD NMR beta reference in broader C-terminal domain context.",
+  "coordinate_system": "UniProt one-index inclusive residues",
+  "ctd_end": 162,
+  "ctd_start": 115,
+  "primary_source": "AF2_benchmark data/range_fs_pairs_test.txt and SPEACH_AF/SPEACH_AF_contacts/range_fs_pairs_all.txt",
+  "primary_source_entry": "2oug_C,6c6s_D,115-162,115-162,115-162,115-162",
+  "protein": "E. coli RfaH",
+  "reason": "Use the exact fold-switching region used by the Chakravarty et al. AF2_benchmark assets instead of guessing a CTD boundary.",
+  "uniprot": "P0AFW0"
+}

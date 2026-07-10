@@ -1,0 +1,188 @@
+[
+  {
+    "role": "input_fasta",
+    "path": "experiments/rfah_memorization/data/prepared/rfah_full_p0afw0.fasta",
+    "present": "True",
+    "note": "P0AFW0 full-length RfaH copied from downloaded reference FASTA"
+  },
+  {
+    "role": "input_fasta",
+    "path": "experiments/rfah_memorization/data/prepared/rfah_ctd_115_162.fasta",
+    "present": "True",
+    "note": "CTD 115-162 from AF2_benchmark fold-switching ranges"
+  },
+  {
+    "role": "reference",
+    "path": "experiments/rfah_memorization/data/references/2OUG.pdb",
+    "present": "True",
+    "note": "RfaH alpha reference downloaded locally"
+  },
+  {
+    "role": "reference",
+    "path": "experiments/rfah_memorization/data/references/6C6S.pdb",
+    "present": "True",
+    "note": "RfaH beta/autoinhibited reference downloaded locally"
+  },
+  {
+    "role": "reference",
+    "path": "experiments/rfah_memorization/data/references/2LCL.pdb",
+    "present": "True",
+    "note": "Burmann NMR beta reference; broader C-terminal domain context"
+  },
+  {
+    "role": "af2_benchmark_clean_chain",
+    "path": "AF2_benchmark/data/clean_chains/2oug_C.pdb",
+    "present": "True",
+    "note": "clean RfaH 2oug_C chain"
+  },
+  {
+    "role": "af2_benchmark_clean_chain",
+    "path": "AF2_benchmark/data/clean_chains/6c6s_D.pdb",
+    "present": "True",
+    "note": "clean RfaH 6c6s_D chain"
+  },
+  {
+    "role": "af2_benchmark_range",
+    "path": "AF2_benchmark/data/range_fs_pairs_test.txt",
+    "present": "True",
+    "note": "records RfaH 115-162 test range"
+  },
+  {
+    "role": "af2_benchmark_range",
+    "path": "AF2_benchmark/SPEACH_AF/SPEACH_AF_contacts/range_fs_pairs_all.txt",
+    "present": "True",
+    "note": "records RfaH 115-162 all-set range"
+  },
+  {
+    "role": "af2_benchmark_figure_4",
+    "path": "AF2_benchmark/plots/figure_4/RfaH_unrelaxed_rank_001_alphafold2_model_2_seed_003.r0.pdb",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_4",
+    "path": "AF2_benchmark/plots/figure_4/RfaH_unrelaxed_rank_001_alphafold2_model_2_seed_003.r1.pdb",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_4",
+    "path": "AF2_benchmark/plots/figure_4/RfaH_unrelaxed_rank_001_alphafold2_model_2_seed_003.r2.pdb",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_4",
+    "path": "AF2_benchmark/plots/figure_4/msa_1_unrelaxed_rank_001_alphafold2_model_1_seed_000.r0.pdb",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_4",
+    "path": "AF2_benchmark/plots/figure_4/msa_2_unrelaxed_rank_001_alphafold2_model_1_seed_003.r0.pdb",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/coevolution_v_dist.py",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah/RfaH_all_rank_001_alphafold2_model_2_seed_003.r0_distogram.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah/RfaH_all_rank_001_alphafold2_model_2_seed_003.r1_distogram.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah/RfaH_all_rank_001_alphafold2_model_2_seed_003.r2_distogram.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah/RfaH_unrelaxed_rank_004_alphafold2_model_2_seed_000.r3.pdb",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah/RfaH_unrelaxed_rank_005_alphafold2_model_1_seed_001.r3.pdb",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah/rank_001_alphafold2_model_2_seed_003_msa_extra_msa_0.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah/rank_001_alphafold2_model_2_seed_003_msa_extra_msa_1.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah/rank_001_alphafold2_model_2_seed_003_msa_extra_msa_2.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah.png",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah_no_recycles/RfaH_all_rank_001_alphafold2_model_2_seed_003.r0_distogram.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah_no_recycles/msa_1_all_rank_001_alphafold2_model_1_seed_000.r0_distogram.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah_no_recycles/msa_2_all_rank_001_alphafold2_model_1_seed_003.r0_distogram.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah_no_recycles/rank_001_alphafold2_model_1_seed_000_msa_extra_msa_0.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah_no_recycles/rank_001_alphafold2_model_1_seed_003_msa_extra_msa_0.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah_no_recycles/rank_001_alphafold2_model_2_seed_003_msa_extra_msa_0.npy",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  },
+  {
+    "role": "af2_benchmark_figure_s12",
+    "path": "AF2_benchmark/plots/figure_s12/rfah_no_recycles.png",
+    "present": "True",
+    "note": "AF2_benchmark support asset"
+  }
+]
